@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('voicemail-received', [\App\Http\Controllers\API\VoiceController::class, 'inboundVoicemail'])->name('voice.inbound-voicemail');

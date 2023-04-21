@@ -10,15 +10,15 @@
 	}
 
 
-	function rellaxInit() {
-		const target = document.querySelectorAll('.js-rellax')
-		if (!target) return;
-
-		var rellax = new Rellax('.js-rellax', {
-			breakpoints: [576, 768, 1025]
-		});
-	}
-	rellaxInit();
+	// function rellaxInit() {
+	// 	const target = document.querySelectorAll('.js-rellax')
+	// 	if (!target) return;
+    //
+	// 	var rellax = new Rellax('.js-rellax', {
+	// 		breakpoints: [576, 768, 1025]
+	// 	});
+	// }
+	// rellaxInit();
 
 
 	function scrollToIdInit() {

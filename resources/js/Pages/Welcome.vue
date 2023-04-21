@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Career Search & Career Advice with AI" />
 
     <section class="banner-section">
         <div class="auto-container">

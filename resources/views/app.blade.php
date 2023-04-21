@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'My USA Career') }}</title>
+        <link rel="icon" type="image/png" href="{{ url('images/favicon-ico.png') }}">
 
         <!-- Scripts -->
         @routes
@@ -32,7 +33,7 @@
     <script src="{{ url('js/appear.js') }}"></script>
     <script src="{{ url('js/anm.min.js') }}"></script>
     <script src="{{ url('js/ScrollMagic.min.js') }}"></script>
-    <script src="{{ url('js/rellax.min.js') }}"></script>
+{{--    <script src="{{ url('js/rellax.min.js') }}"></script>--}}
     <script src="{{ url('js/owl.js') }}"></script>
     <script src="{{ url('js/wow.js') }}"></script>
     <script src="{{ url('js/script.js') }}"></script>
