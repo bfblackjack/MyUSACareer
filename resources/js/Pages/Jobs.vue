@@ -76,21 +76,28 @@
                 <div class="ls-outer">
                     <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
 
-                    <!-- ls Switcher -->
-                    <div class="ls-switcher">
-                        <div class="showing-result">
-                            <div class="text">Showing <strong>0</strong> of <strong>0</strong> jobs</div>
+                    <div class="row">
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12" v-for="(job, index) in jobs.jobs">
+                            <div class="inner-box">
+                                <div class="content">
+                                    <span class="company-logo"><img :src="job.logo_url" alt=""></span>
+                                    <h4><a :href="job.url">{{ job.title }}</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> {{ job.major_category0 }}</li>
+                                        <li><span class="icon flaticon-map-locator"></span> {{ job.city[0] }}</li>
+                                        <li><span class="icon flaticon-clock-3"></span> {{ moment(job.date).format('MM/DD/YYYY') }}</li>
+                                    </ul>
+                                    <ul class="job-other-info">
+                                        <li class="time">{{ job.worktype_details[0].label }}</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="alert alert-warning">Sorry, no jobs were found at this time. Check back later or try resetting your search.</div>
-                    </div>
-
-
                     <!-- Listing Show More -->
                     <div class="ls-show-more">
-                        <p>Showing 0 of 0 Jobs</p>
+                        <p>Looking for different jobs? Try updating the filters on this page.</p>
                         <div class="bar"><span class="bar-inner" style="width: 0%"></span></div>
 <!--                        <button class="show-more">Show More</button>-->
                     </div>
@@ -103,6 +110,7 @@
 <script setup>
 import {Head, Link, router, useForm} from "@inertiajs/vue3";
 import {ref} from "vue";
+import moment from "moment";
 
 const props = defineProps({
     app: Object,

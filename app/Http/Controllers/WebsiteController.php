@@ -75,11 +75,6 @@ class WebsiteController extends Controller
         $randSalaryMin = random_int(30000, 45000);
         $randSalaryMax = random_int(38000,75000);
 
-        $apikey = config('services.job_apis.jobs2careers.key');
-        $apipass = config('services.job_apis.jobs2careers.pass');
-        $url = 'https://api.jobs2careers.com/api/search.php?id=' . $apikey . '&pass=' . $apipass . '&format=json&link=1&logo=1&ip=' . $user_ip . '&q='.$str.'&l=' . $location;
-        $url .= '&salary.period=yearly&salary.min='.$randSalaryMin.'&salary.max='.$randSalaryMax;
-
         if($request->has('job') && !empty($request->job)) {
             $query = $request->job;
         }
@@ -136,8 +131,14 @@ class WebsiteController extends Controller
             $categories[] = Str::headline($catEnum->name);
         }
 
+        $res = \Http::withHeaders([
+            'Content-Type: application/json'
+        ])->post($url);
+
+        $body = json_decode($res->body());
+
         return inertia()->render('Jobs')->with([
-            'jobs' => null,
+            'jobs' => $body,
             'categories' => $categories,
             'location' => $location,
             'type' => 'All Categories',
