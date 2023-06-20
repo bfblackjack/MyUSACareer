@@ -22,6 +22,7 @@ Route::get('about', [\App\Http\Controllers\WebsiteController::class, 'about'])->
 Route::get('contact', [\App\Http\Controllers\WebsiteController::class, 'contact'])->name('contact');
 Route::post('subscribeToNewsletter', [\App\Http\Controllers\WebsiteController::class, 'subscribeToNewsLetter'])->name('subscribeToNewsletter');
 Route::get('privacy-policy', [\App\Http\Controllers\WebsiteController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('view-detail-job', [\App\Http\Controllers\WebsiteController::class, 'directJob'])->name('view-detail-job');
 
 Route::middleware([
     'auth:sanctum',
