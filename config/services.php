@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'job_apis' => [
+        'jobs2careers' => [
+            'key' => env('JOBS2CAREERS_KEY'),
+            'pass' => env('JOBS2CAREERS_PASS'),
+        ]
+    ],
+
+    'ip_key' => env('IP_LOOKUP_KEY'),
 ];

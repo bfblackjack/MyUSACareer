@@ -36,18 +36,18 @@
             <div class="background-image" style="background-image: url(images/background/5.png);"></div>
             <div class="auto-container wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                 <div class="sec-title text-center light">
-                    <h2>Subscribe Our Newsletter</h2>
+                    <h2>Subscribe to Our Newsletter</h2>
                     <div class="text">Get access to helpful tips and notifications to new job offers before the rest when your subscribed to our newsletter.</div>
                 </div>
 
                 <div class="subscribe-form">
-                    <form method="post" action="#">
+                    <form method="post" @submit.prevent>
                         <div class="form-group">
                             <div class="response"></div>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" class="email" value="" placeholder="Your e-mail" required="">
-                            <button type="button" id="subscribe-newslatters" class="theme-btn btn-style-one">Subscribe</button>
+                            <input type="email" v-model="email" class="email" placeholder="Your e-mail" required>
+                            <button type="button" id="subscribe-newslatters" class="theme-btn btn-style-one" @click="submitNewsletter">Subscribe</button>
                         </div>
                     </form>
                 </div>
@@ -57,11 +57,32 @@
 </template>
 
 <script setup>
-import {Head, Link} from "@inertiajs/vue3";
+import {Head, Link, router} from "@inertiajs/vue3";
+import {ref} from "vue";
+import {useToast} from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+const $toast = useToast();
 
 const props = defineProps({
     app: Object,
 })
+
+const email = ref()
+
+const submitNewsletter = () => {
+    console.log('Clicked.');
+    router.post(route('subscribeToNewsletter'), {
+        email: email.value,
+    }, {
+        onSuccess: () => {
+            email.value = null;
+            $toast.success("You have successfully subscribed to the My USA Career Newsletter!");
+        },
+        onError: () => {
+            $toast.error("Please enter a valid email to subscribe!");
+        }
+    })
+}
 </script>
 
 <style scoped>

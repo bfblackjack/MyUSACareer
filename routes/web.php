@@ -20,6 +20,7 @@ Route::get('/', [\App\Http\Controllers\WebsiteController::class, 'index'])->name
 Route::get('jobs', [\App\Http\Controllers\WebsiteController::class, 'jobs'])->name('jobs');
 Route::get('about', [\App\Http\Controllers\WebsiteController::class, 'about'])->name('about');
 Route::get('contact', [\App\Http\Controllers\WebsiteController::class, 'contact'])->name('contact');
+Route::post('subscribeToNewsletter', [\App\Http\Controllers\WebsiteController::class, 'subscribeToNewsLetter'])->name('subscribeToNewsletter');
 Route::get('privacy-policy', [\App\Http\Controllers\WebsiteController::class, 'privacyPolicy'])->name('privacy-policy');
 
 Route::middleware([

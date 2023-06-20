@@ -1,8 +1,10 @@
 <script setup>
 import {Head, Link, router} from '@inertiajs/vue3';
+import moment from "moment";
 
 const props = defineProps({
     app: Object,
+    jobs: Object,
 })
 
 </script>
@@ -20,38 +22,38 @@ const props = defineProps({
                             <div class="text">Find Career & Employment Opportunities with {{ app.name }}</div>
                         </div>
 
-                        <!-- Job Search Form -->
-                        <div class="job-search-form">
-                            <form method="post" @submit.prevent>
-                                <div class="row">
-                                    <div class="form-group col-lg-5 col-md-12 col-sm-12">
-                                        <span class="icon flaticon-search-1"></span>
-                                        <input type="text" name="field_name" placeholder="Search job title or keyword">
-                                    </div>
-                                    <!-- Form Group -->
-                                    <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
-                                        <span class="icon flaticon-map-locator"></span>
-                                        <input type="text" name="field_name" placeholder="City or zip code">
-                                    </div>
-                                    <!-- Form Group -->
-                                    <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
-                                        <button type="submit" class="theme-btn btn-style-one" @click="router.visit(route('jobs'))"><span class="btn-title">Search Jobs</span></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Job Search Form -->
+<!--                        &lt;!&ndash; Job Search Form &ndash;&gt;-->
+<!--                        <div class="job-search-form">-->
+<!--                            <form method="post" @submit.prevent>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="form-group col-lg-5 col-md-12 col-sm-12">-->
+<!--                                        <span class="icon flaticon-search-1"></span>-->
+<!--                                        <input type="text" name="field_name" placeholder="Search job title or keyword">-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; Form Group &ndash;&gt;-->
+<!--                                    <div class="form-group col-lg-4 col-md-12 col-sm-12 location">-->
+<!--                                        <span class="icon flaticon-map-locator"></span>-->
+<!--                                        <input type="text" name="field_name" placeholder="City or zip code">-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; Form Group &ndash;&gt;-->
+<!--                                    <div class="form-group col-lg-3 col-md-12 col-sm-12 btn-box">-->
+<!--                                        <button type="submit" class="theme-btn btn-style-one" @click="router.visit(route('jobs'))"><span class="btn-title">Search Jobs</span></button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Job Search Form &ndash;&gt;-->
 
                         <!-- Popular Search -->
                         <div class="popular-searches">
                             <span class="title">Popular Searches:</span>
-                            <a href="#">Work from home</a>,
-                            <a href="#">Administration</a>,
-                            <a href="#">Information Technology</a>,
-                            <a href="#">Engineering</a>,
-                            <a href="#">Senior Sales</a>,
-                            <a href="#">Remote work</a>,
-                            <a href="#">Software</a>
+                            <a :href="route('jobs', {job: 'work from home'})">Work from home</a>,
+                            <a :href="route('jobs', {job: 'administration'})">Administration</a>,
+                            <a :href="route('jobs', {job: 'information technology'})">Information Technology</a>,
+                            <a :href="route('jobs', {job: 'engineering'})">Engineering</a>,
+                            <a :href="route('jobs', {job: 'senior sales'})">Senior Sales</a>,
+                            <a :href="route('jobs', {job: 'remote work'})">Remote work</a>,
+                            <a :href="route('jobs', {job: 'software'})">Software</a>
                         </div>
                         <!-- End Popular Search -->
                     </div>
@@ -110,109 +112,27 @@ const props = defineProps({
             <div class="sec-title-outer">
                 <div class="sec-title">
                     <h2>Featured Jobs</h2>
-                    <div class="text">Highly rated, desirable jobs - right at your fingertips.</div>
+                    <div class="text">Highly rated, remote jobs - work from home!.</div>
                 </div>
-                <a href="#" class="link">Browse All <span class="icon fa fa-angle-right"></span></a>
+                <a :href="route('jobs')" class="link">Browse All <span class="icon fa fa-angle-right"></span></a>
             </div>
 
             <div class="outer-box wow fadeInUp">
-                <!-- Job Block -->
-                <div class="job-block-five">
+                <div class="job-block-five" v-for="(job, index) in jobs.jobs">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/4-1.png" alt=""></span>
-                            <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
+                            <span class="company-logo"><img :src="job.logo_url" alt=""></span>
+                            <h4><a :href="job.url">{{ job.title }}</a></h4>
                             <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                                <li><span class="icon flaticon-briefcase"></span> {{ job.major_category0 }}</li>
+                                <li><span class="icon flaticon-map-locator"></span> {{ job.city[0] }}</li>
+                                <li><span class="icon flaticon-clock-3"></span> {{ moment(job.date).format('MM/DD/YYYY') }}</li>
                             </ul>
                         </div>
                         <ul class="job-other-info">
-                            <li class="time">Full Time</li>
+                            <li class="time">{{ job.worktype_details[0].label }}</li>
                         </ul>
-                        <a href="#" class="theme-btn btn-style-three">Apply Job</a>
-                    </div>
-                </div>
-
-                <!-- Job Block -->
-                <div class="job-block-five">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/4-2.png" alt=""></span>
-                            <h4><a href="#">Recruiting Coordinator</a></h4>
-                            <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                            </ul>
-                        </div>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                        </ul>
-                        <a href="#" class="theme-btn btn-style-three">Apply Job</a>
-                    </div>
-                </div>
-
-                <!-- Job Block -->
-                <div class="job-block-five">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/4-3.png" alt=""></span>
-                            <h4><a href="#">Product Manager, Studio</a></h4>
-                            <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                            </ul>
-                        </div>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                        </ul>
-                        <a href="#" class="theme-btn btn-style-three">Apply Job</a>
-                    </div>
-                </div>
-
-                <!-- Job Block -->
-                <div class="job-block-five">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/4-4.png" alt=""></span>
-                            <h4><a href="#">Senior Product Designer</a></h4>
-                            <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                            </ul>
-                        </div>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                        </ul>
-                        <a href="#" class="theme-btn btn-style-three">Apply Job</a>
-                    </div>
-                </div>
-
-                <!-- Job Block -->
-                <div class="job-block-five">
-                    <div class="inner-box">
-                        <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/4-5.png" alt=""></span>
-                            <h4><a href="#">Senior Full Stack Engineer, Creator Success</a></h4>
-                            <ul class="job-info">
-                                <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                                <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                            </ul>
-                        </div>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                        </ul>
-                        <a href="#" class="theme-btn btn-style-three">Apply Job</a>
+                        <a :href="job.url" class="theme-btn btn-style-three">View Job</a>
                     </div>
                 </div>
             </div>
