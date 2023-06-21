@@ -49,9 +49,8 @@ class WebsiteController extends Controller
 
         $body = json_decode($res->body());
 
-        dd($body);
-
-        \Log::info('see res', ['body' => $body]);
+        // todo: logging doesnt work on the server 6-20 10:38p. FIX perms
+//        \Log::info('see res', ['body' => $body]);
 
         return inertia()->render('Welcome')->with([
             'jobs' => $body
