@@ -49,6 +49,8 @@ class WebsiteController extends Controller
 
         $body = json_decode($res->body());
 
+        \Log::info('see res', ['body' => $body]);
+
         return inertia()->render('Welcome')->with([
             'jobs' => $body
         ]);
